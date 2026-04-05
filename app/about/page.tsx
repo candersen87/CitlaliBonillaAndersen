@@ -19,7 +19,14 @@ export const metadata: Metadata = {
 interface AboutData {
   name: string
   bio?: any[]
-  image?: any
+  image?: {
+    asset?: {
+      metadata?: {
+        dimensions?: { width: number; height: number }
+      }
+    }
+    [key: string]: any
+  }
   location?: string
   email?: string
 }
@@ -29,7 +36,7 @@ export default async function About() {
     `*[_type == "about"][0] {
       name,
       bio,
-      image,
+      image { ..., asset->{ _id, metadata { dimensions } } },
       location,
       email
     }`
@@ -50,19 +57,7 @@ export default async function About() {
     <Layout>
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          {about.image && (
-            <div className="aspect-square relative overflow-hidden bg-gray-100">
-              <Image
-                src={urlFor(about.image).url()}
-                alt={about.name}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-          )}
-
-          <div>
+          <div className="order-first">
             <h1 className="text-5xl font-light mb-6 text-black text-center">{about.name}</h1>
 
             {about.bio && (
@@ -98,6 +93,24 @@ export default async function About() {
               </p>
             )}
           </div>
+
+          {about.image && (() => {
+            const dims = about.image?.asset?.metadata?.dimensions
+            const width = dims?.width ?? 800
+            const height = dims?.height ?? 1000
+            return (
+              <div className="relative overflow-hidden bg-gray-100 w-full md:order-first">
+                <Image
+                  src={urlFor(about.image).url()}
+                  alt={about.name}
+                  width={width}
+                  height={height}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            )
+          })()}
         </div>
       </section>
     </Layout>
