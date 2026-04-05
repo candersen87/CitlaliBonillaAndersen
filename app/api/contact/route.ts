@@ -8,11 +8,23 @@ const writeClient = client.withConfig({
   useCdn: false,
 })
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
 export async function POST(request: Request) {
   try {
-    const { name, email, message } = await request.json()
+    const body = await request.json()
+    const { name, email, message } = body
 
-    // Validate input
+    // Validate presence
     if (!name || !email || !message) {
       return Response.json(
         { error: 'Missing required fields' },
@@ -20,26 +32,41 @@ export async function POST(request: Request) {
       )
     }
 
+    // Validate types
+    if (typeof name !== 'string' || typeof email !== 'string' || typeof message !== 'string') {
+      return Response.json({ error: 'Invalid input' }, { status: 400 })
+    }
+
+    // Validate lengths
+    if (name.length > 100 || email.length > 254 || message.length > 5000) {
+      return Response.json({ error: 'Input too long' }, { status: 400 })
+    }
+
+    // Validate email format
+    if (!EMAIL_REGEX.test(email)) {
+      return Response.json({ error: 'Invalid email address' }, { status: 400 })
+    }
+
     // Save to Sanity
     const submission = await writeClient.create({
       _type: 'contactSubmission',
-      name,
-      email,
-      message,
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      message: message.trim(),
       submittedAt: new Date().toISOString(),
     })
 
-    // Send email notification to admin
+    // Send email notification to admin (values escaped to prevent XSS)
     await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: process.env.CONTACT_FORM_EMAIL!,
-      subject: `New Contact Form Submission from ${name}`,
+      subject: `New Contact Form Submission from ${escapeHtml(name.trim())}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Name:</strong> ${escapeHtml(name.trim())}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email.trim())}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${escapeHtml(message.trim()).replace(/\n/g, '<br>')}</p>
       `,
     })
 

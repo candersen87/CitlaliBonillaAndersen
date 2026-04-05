@@ -82,6 +82,7 @@ export default function Contact() {
               value={formData.name}
               onChange={handleChange}
               required
+              maxLength={100}
               className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-black font-light text-gray-600"
             />
           </div>
@@ -97,6 +98,7 @@ export default function Contact() {
               value={formData.email}
               onChange={handleChange}
               required
+              maxLength={254}
               className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-black font-light text-gray-600"
             />
           </div>
@@ -112,6 +114,7 @@ export default function Contact() {
               onChange={handleChange}
               required
               rows={6}
+              maxLength={5000}
               className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-black font-light resize-none text-gray-600"
             />
           </div>
