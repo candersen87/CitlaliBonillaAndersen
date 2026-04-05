@@ -33,7 +33,7 @@ export default function Navigation() {
               alt="Citlali Bonilla Andersen"
               width={1800}
               height={500}
-              className="h-14 w-auto rotate-90"
+              className="h-14 w-auto"
             />
           </Link>
 
