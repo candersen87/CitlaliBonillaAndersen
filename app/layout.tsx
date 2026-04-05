@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GFS_Didot } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const gfsDidot = GFS_Didot({
@@ -76,7 +77,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-white text-black antialiased font-sans">{children}</body>
+      <body className="bg-white text-black antialiased font-sans">{children}<Analytics /></body>
     </html>
   );
 }
