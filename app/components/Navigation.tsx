@@ -29,7 +29,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center -ml-2">
             <Image
-              src="/Logo3.png"
+              src="/LogoUpdated.png"
               alt="Citlali Bonilla Andersen"
               width={1400}
               height={400}

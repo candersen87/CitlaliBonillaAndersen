@@ -54,10 +54,10 @@ export default async function Home() {
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-light leading-tight mb-6 text-white">
-            CITLALI BONILLA ANDERSEN
+            BRUGLII STUDIO
           </h1>
           <p className="text-xl md:text-2xl text-white font-light leading-relaxed mb-8">
-            Abstract painter
+            Contemporary works defined by visceral textures and sgraffito techniques that highlight the raw, physical process of application
           </p>
           <Link
             href="/gallery"
