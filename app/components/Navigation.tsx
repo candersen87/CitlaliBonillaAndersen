@@ -27,13 +27,13 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop nav row */}
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center -ml-2">
             <Image
               src="/Logo3.png"
               alt="Citlali Bonilla Andersen"
-              width={1800}
-              height={500}
-              className="h-14 w-auto"
+              width={1400}
+              height={400}
+              className="h-10 w-auto"
             />
           </Link>
 
