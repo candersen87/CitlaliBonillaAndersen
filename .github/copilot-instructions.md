@@ -1,8 +1,8 @@
-# AI Workspace Instructions: Allybruglii
+# AI Workspace Instructions: Bruglii Studio
 
 ## Project Overview
 
-**Allybruglii** is an integrated Next.js + Sanity CMS application combining a modern web frontend with an embedded content management studio. The architecture is a single codebase with co-located frontend, API routes, and Sanity Studio.
+**Bruglii Studio** is an integrated Next.js + Sanity CMS application combining a modern web frontend with an embedded content management studio. The architecture is a single codebase with co-located frontend, API routes, and Sanity Studio.
 
 ### Stack
 - **Frontend**: Next.js 16.2.2 (App Router) + React 19.2.4 with TypeScript (strict)
@@ -48,7 +48,7 @@ app/                          # Next.js App Router (pages, layouts, API routes)
 ├── page.tsx                # Home page
 ├── globals.css             # Global styles + Tailwind imports
 ├── studio/[[...tool]]/     # Sanity Studio route (dynamic catch-all)
-└── allybruglii/[[...tool]]/ # Duplicate Studio route (⚠️ clarify which is authoritative)
+└── bruglii/[[...tool]]/ # Duplicate Studio route (⚠️ clarify which is authoritative)
 
 sanity/                       # Sanity CMS content & configuration
 ├── env.ts                  # Environment variable setup + API versioning
@@ -144,7 +144,7 @@ The API version is set to **2026-04-03** (see `sanity/env.ts`). This must match 
 ## Known Issues & Gotchas
 
 ### ⚠️ Active Issues
-1. **Duplicate Studio Routes**: Both `/app/studio` and `/app/allybruglii` reference the same Studio page
+1. **Duplicate Studio Routes**: Both `/app/studio` and `/app/bruglii` reference the same Studio page
    - **Action**: Consolidate to a single route; recommend `/studio`
    - **Why**: Confusion about which route is "live"; potential for divergent configurations
 

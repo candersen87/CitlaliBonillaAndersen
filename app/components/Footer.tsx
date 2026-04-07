@@ -37,7 +37,7 @@ export default function Footer() {
 
           {/* Right: Location */}
           <div className="text-center md:text-right order-2 md:order-3">
-            <p className="text-black font-normal mb-1">Citlali Bonilla Andersen Studio</p>
+            <p className="text-black font-normal mb-1">Bruglii Studio</p>
             <p>Copenhagen, Denmark / Mexico City, Mexico</p>
           </div>
         </div>

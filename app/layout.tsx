@@ -11,27 +11,27 @@ const gfsDidot = GFS_Didot({
 
 export const metadata: Metadata = {
   title: {
-    default: "Ally Bruglii — Contemporary Abstract Paintings",
-    template: "%s | Ally Bruglii",
+    default: "Citlali Bonilla Andersen — Contemporary Abstract Paintings",
+    template: "%s | Citlali Bonilla Andersen",
   },
   description:
-    "Ally Bruglii is a contemporary abstract painter based in Copenhagen, Denmark. Explore original paintings that express emotional depth through color and form.",
-  keywords: ["abstract painting", "contemporary art", "Copenhagen artist", "original paintings", "Ally Bruglii"],
-  authors: [{ name: "Ally Bruglii" }],
-  creator: "Ally Bruglii",
-  metadataBase: new URL("https://allybruglii.com"),
+    "Citlali Bonilla Andersen is a contemporary abstract painter based in Copenhagen, Denmark. Explore original paintings that express emotional depth through color and form.",
+  keywords: ["abstract painting", "contemporary art", "Copenhagen artist", "original paintings", "Citlali Bonilla Andersen"],
+  authors: [{ name: "Citlali Bonilla Andersen" }],
+  creator: "Citlali Bonilla Andersen",
+  metadataBase: new URL("https://citlalibonillaandersen.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://allybruglii.com",
-    siteName: "Ally Bruglii",
-    title: "Ally Bruglii — Contemporary Abstract Paintings",
+    url: "https://citlalibonillaandersen.com",
+    siteName: "Citlali Bonilla Andersen",
+    title: "Citlali Bonilla Andersen — Contemporary Abstract Paintings",
     description:
       "Original abstract paintings exploring color, movement, and emotion. Based in Copenhagen, Denmark.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ally Bruglii — Contemporary Abstract Paintings",
+    title: "Citlali Bonilla Andersen — Contemporary Abstract Paintings",
     description: "Original abstract paintings exploring color, movement, and emotion.",
   },
 };
@@ -46,9 +46,9 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://allybruglii.com/#artist",
-        name: "Ally Bruglii",
-        url: "https://allybruglii.com",
+        "@id": "https://citlalibonillaandersen.com/#artist",
+        name: "Citlali Bonilla Andersen",
+        url: "https://citlalibonillaandersen.com",
         description:
           "Contemporary abstract painter based in Copenhagen, Denmark.",
         address: {
@@ -59,12 +59,12 @@ export default function RootLayout({
       },
       {
         "@type": "ArtGallery",
-        "@id": "https://allybruglii.com/#gallery",
-        name: "Ally Bruglii Gallery",
-        url: "https://allybruglii.com",
+        "@id": "https://citlalibonillaandersen.com/#gallery",
+        name: "Citlali Bonilla Andersen Gallery",
+        url: "https://citlalibonillaandersen.com",
         description:
           "Original abstract paintings exploring color, movement, and emotion.",
-        artist: { "@id": "https://allybruglii.com/#artist" },
+        artist: { "@id": "https://citlalibonillaandersen.com/#artist" },
       },
     ],
   }

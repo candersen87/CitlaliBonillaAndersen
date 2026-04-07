@@ -5,7 +5,7 @@ import Layout from '../components/Layout'
 export const metadata: Metadata = {
   title: 'Commissions',
   description:
-    'Commission a custom painting by Ally Bruglii. Work together to create a unique original piece tailored to your vision, space, and palette.',
+    'Commission a custom painting by Citlali Bonilla Andersen. Work together to create a unique original piece tailored to your vision, space, and palette.',
 }
 
 const steps = [

@@ -8,11 +8,11 @@ import { PortableText } from '@portabletext/react'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Learn about Ally Bruglii — a contemporary abstract painter based in Copenhagen, Denmark.',
+    'Learn about Citlali Bonilla Andersen — a contemporary abstract painter based in Copenhagen, Denmark.',
   openGraph: {
-    title: 'About — Ally Bruglii',
+    title: 'About — Citlali Bonilla Andersen',
     description: 'Contemporary abstract painter based in Copenhagen, Denmark.',
-    url: 'https://allybruglii.com/about',
+    url: 'https://citlalibonillaandersen.com/about',
   },
 }
 

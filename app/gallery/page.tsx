@@ -8,11 +8,11 @@ import { urlFor } from '@/sanity/lib/image'
 export const metadata: Metadata = {
   title: 'Gallery',
   description:
-    'Browse original abstract paintings by Ally Bruglii. A collection exploring color, emotion, and form.',
+    'Browse original abstract paintings by Citlali Bonilla Andersen. A collection exploring color, emotion, and form.',
   openGraph: {
-    title: 'Gallery — Ally Bruglii',
-    description: 'Browse original abstract paintings by Ally Bruglii.',
-    url: 'https://allybruglii.com/gallery',
+    title: 'Gallery — Citlali Bonilla Andersen',
+    description: 'Browse original abstract paintings by Citlali Bonilla Andersen.',
+    url: 'https://citlalibonillaandersen.com/gallery',
   },
 }
 

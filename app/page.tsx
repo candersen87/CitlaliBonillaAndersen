@@ -6,13 +6,13 @@ import Layout from './components/Layout'
 import { urlFor } from '@/sanity/lib/image'
 
 export const metadata: Metadata = {
-  title: 'Ally Bruglii — Contemporary Abstract Paintings',
+  title: 'Citlali Bonilla Andersen — Contemporary Abstract Paintings',
   description:
-    'Ally Bruglii is a contemporary abstract painter based in Copenhagen. Discover original paintings that explore color, movement, and emotion.',
+    'Citlali Bonilla Andersen is a contemporary abstract painter based in Copenhagen. Discover original paintings that explore color, movement, and emotion.',
   openGraph: {
-    title: 'Ally Bruglii — Contemporary Abstract Paintings',
+    title: 'Citlali Bonilla Andersen — Contemporary Abstract Paintings',
     description: 'Original abstract paintings exploring color, movement, and emotion.',
-    url: 'https://allybruglii.com',
+    url: 'https://citlalibonillaandersen.com',
   },
 }
 
@@ -57,7 +57,7 @@ export default async function Home() {
             BRUGLII STUDIO
           </h1>
           <p className="text-xl md:text-2xl text-white font-light leading-relaxed mb-8">
-            Contemporary works defined by visceral textures and sgraffito techniques that highlight the raw, physical process of application
+            An ongoing series of sophisticated contemporary abstracts where rich impasto layering and palette knife scraping transform the flat canvas. These works explore the intersection of light and complex textures.
           </p>
           <Link
             href="/gallery"
@@ -106,7 +106,7 @@ export default async function Home() {
         <div className="bg-gray-50 p-12 text-center">
           <h2 className="text-3xl font-light mb-6 text-black">Get in touch</h2>
           <p className="text-gray-600 mb-8 font-light">
-            Interested in commissioning a work or have questions? Reach out.
+            For inquiries or more information, you're welcome to reach out via Instagram or the contact form.<br />I look forward to hearing from you.
           </p>
           <Link
             href="/contact"

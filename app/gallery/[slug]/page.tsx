@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     { slug }
   )
   if (!painting) return { title: 'Painting Not Found' }
-  return { title: `${painting.title} | Ally Bruglii` }
+  return { title: `${painting.title} | Citlali Bonilla Andersen` }
 }
 
 export default async function PaintingDetail({ params }: PageProps) {
