@@ -1,5 +1,7 @@
 import { Resend } from 'resend'
+import { render } from '@react-email/render'
 import { client } from '@/sanity/lib/client'
+import { ContactNotification } from '@/app/emails/ContactNotification'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -9,15 +11,6 @@ const writeClient = client.withConfig({
 })
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;')
-}
 
 export async function POST(request: Request) {
   try {
@@ -56,18 +49,31 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString(),
     })
 
-    // Send email notification to admin (values escaped to prevent XSS)
+    // Send email notification to admin
+    const submittedAt = new Date().toLocaleString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZoneName: 'short',
+    })
+
+    const html = await render(
+      ContactNotification({
+        name: name.trim(),
+        email: email.trim(),
+        message: message.trim(),
+        submittedAt,
+      })
+    )
+
     await resend.emails.send({
-      from: 'onboarding@resend.dev',
+      from: 'Bruglii <notifications@citlalibonillaandersen.com>',
       to: process.env.CONTACT_FORM_EMAIL!,
-      subject: `New Contact Form Submission from ${escapeHtml(name.trim())}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${escapeHtml(name.trim())}</p>
-        <p><strong>Email:</strong> ${escapeHtml(email.trim())}</p>
-        <p><strong>Message:</strong></p>
-        <p>${escapeHtml(message.trim()).replace(/\n/g, '<br>')}</p>
-      `,
+      replyTo: email.trim(),
+      subject: `New message from ${name.trim()}`,
+      html,
     })
 
     return Response.json(

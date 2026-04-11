@@ -20,7 +20,12 @@ interface Painting {
   _id: string
   title: string
   slug: { current: string }
-  image: any
+  image: {
+    asset: { _ref: string }
+    hotspot?: { x: number; y: number }
+    crop?: unknown
+    lqip?: string
+  }
 }
 
 export const revalidate = 3600
@@ -31,7 +36,10 @@ export default async function Home() {
       _id,
       title,
       slug,
-      image
+      image {
+        ...,
+        "lqip": asset->metadata.lqip
+      }
     }`
   )
 
@@ -69,20 +77,25 @@ export default async function Home() {
       </section>
 
       {/* Featured Paintings Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <h2 className="text-4xl font-light mb-12 text-black text-center">Recent Work</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <h2 className="text-4xl font-light mb-14 text-black text-center">Recent Work</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {paintings.map((painting) => (
             <Link key={painting._id} href={`/gallery/${painting.slug.current}`}>
               <div className="group cursor-pointer">
-                <div className="aspect-square relative overflow-hidden bg-gray-100 mb-4">
-                  <Image
-                    src={urlFor(painting.image).url()}
-                    alt={painting.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition duration-300"
-                  />
+                {/* Museum frame: white mat padding around artwork */}
+                <div className="bg-white p-5 shadow-sm group-hover:shadow-md transition-shadow duration-300 mb-5">
+                  <div className="aspect-square relative overflow-hidden bg-gray-50">
+                    <Image
+                      src={urlFor(painting.image).url()}
+                      alt={painting.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition duration-300"
+                      placeholder={painting.image.lqip ? 'blur' : 'empty'}
+                      blurDataURL={painting.image.lqip ?? undefined}
+                    />
+                  </div>
                 </div>
                 <h3 className="text-lg font-light mb-1 text-black group-hover:text-gray-600 text-center">
                   {painting.title}

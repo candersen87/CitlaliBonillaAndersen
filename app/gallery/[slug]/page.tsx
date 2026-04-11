@@ -14,8 +14,21 @@ interface PaintingDetail {
   _id: string
   title: string
   slug: { current: string }
-  image: any
-  gallery?: any[]
+  altText?: string
+  seoTitle?: string
+  seoDescription?: string
+  image: {
+    asset: { _ref: string }
+    hotspot?: { x: number; y: number }
+    crop?: unknown
+    lqip?: string
+  }
+  gallery?: Array<{
+    asset: { _ref: string }
+    hotspot?: { x: number; y: number }
+    crop?: unknown
+    lqip?: string
+  }>
   story?: any[]
   size?: string
   medium?: string
@@ -36,12 +49,52 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const painting = await client.fetch<{ title: string }>(
-    `*[_type == "painting" && slug.current == $slug][0] { title }`,
+  const painting = await client.fetch<{
+    title: string
+    altText?: string
+    seoTitle?: string
+    seoDescription?: string
+    medium?: string
+    size?: string
+    image: { asset: { _ref: string } }
+  }>(
+    `*[_type == "painting" && slug.current == $slug][0] {
+      title, altText, seoTitle, seoDescription, medium, size, image
+    }`,
     { slug }
   )
   if (!painting) return { title: 'Painting Not Found' }
-  return { title: `${painting.title} | Citlali Bonilla Andersen` }
+
+  const pageTitle = painting.seoTitle ?? painting.title
+  const description =
+    painting.seoDescription ??
+    [painting.medium, painting.size].filter(Boolean).join(', ') ??
+    `Original painting by Citlali Bonilla Andersen.`
+  const imageUrl = urlFor(painting.image).width(1200).height(630).fit('crop').url()
+  const canonicalUrl = `https://citlalibonillaandersen.com/gallery/${slug}`
+
+  return {
+    title: pageTitle,
+    description,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      title: pageTitle,
+      description,
+      url: canonicalUrl,
+      images: [{
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+        alt: painting.altText ?? pageTitle,
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: pageTitle,
+      description,
+      images: [imageUrl],
+    },
+  }
 }
 
 export default async function PaintingDetail({ params }: PageProps) {
@@ -49,7 +102,16 @@ export default async function PaintingDetail({ params }: PageProps) {
 
   const painting = await client.fetch<PaintingDetail>(
     `*[_type == "painting" && slug.current == $slug][0] {
-      _id, title, slug, image, gallery, story, size, medium, price, sold
+      _id, title, slug, altText, seoTitle, seoDescription,
+      image {
+        ...,
+        "lqip": asset->metadata.lqip
+      },
+      gallery[] {
+        ...,
+        "lqip": asset->metadata.lqip
+      },
+      story, size, medium, price, sold
     }`,
     { slug }
   )
@@ -64,8 +126,28 @@ export default async function PaintingDetail({ params }: PageProps) {
     )
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'VisualArtwork',
+    name: painting.title,
+    url: `https://citlalibonillaandersen.com/gallery/${painting.slug.current}`,
+    image: urlFor(painting.image).width(1200).url(),
+    artist: {
+      '@type': 'Person',
+      '@id': 'https://citlalibonillaandersen.com/#artist',
+      name: 'Citlali Bonilla Andersen',
+    },
+    ...(painting.medium && { artMedium: painting.medium }),
+    ...(painting.size && { artworkSurface: painting.size }),
+    ...(painting.seoDescription && { description: painting.seoDescription }),
+  }
+
   return (
     <Layout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
         {/* Back link */}
@@ -87,8 +169,15 @@ export default async function PaintingDetail({ params }: PageProps) {
           {/* Left: Image carousel */}
           <PaintingCarousel
             images={[
-              urlFor(painting.image).width(1200).url(),
-              ...(painting.gallery ?? []).map((img: any) => urlFor(img).width(1200).url()),
+              {
+                url: urlFor(painting.image).width(1200).url(),
+                lqip: painting.image.lqip,
+                alt: painting.altText,
+              },
+              ...(painting.gallery ?? []).map((img) => ({
+                url: urlFor(img).width(1200).url(),
+                lqip: img.lqip,
+              })),
             ]}
             title={painting.title}
             sold={painting.sold}

@@ -6,6 +6,13 @@ export const painting = defineType({
   title: 'Painting',
   type: 'document',
   icon: ImageIcon,
+  fieldsets: [
+    {
+      name: 'seo',
+      title: 'SEO',
+      options: { collapsible: true, collapsed: true },
+    },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -31,6 +38,13 @@ export const painting = defineType({
         hotspot: true,
       },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'altText',
+      title: 'Image Alt Text',
+      type: 'string',
+      description: 'Describe the painting for screen readers and search engines. E.g. "Large-format abstract oil painting in deep blues and gold leaf."',
+      validation: (rule) => rule.required().max(125),
     }),
     defineField({
       name: 'story',
@@ -96,6 +110,23 @@ export const painting = defineType({
       description: 'Up to 2 extra images shown in the carousel alongside the main image',
       of: [defineArrayMember({ type: 'image', options: { hotspot: true } })],
       validation: (rule) => rule.max(2),
+    }),
+    defineField({
+      name: 'seoTitle',
+      title: 'SEO Title',
+      type: 'string',
+      description: 'Override the browser tab / search-result title (60 chars max). Defaults to the painting title.',
+      validation: (rule) => rule.max(60),
+      fieldset: 'seo',
+    }),
+    defineField({
+      name: 'seoDescription',
+      title: 'SEO Description',
+      type: 'text',
+      rows: 3,
+      description: 'Meta description shown in search results (160 chars max). Summarise the work compellingly.',
+      validation: (rule) => rule.max(160),
+      fieldset: 'seo',
     }),
   ],
 })

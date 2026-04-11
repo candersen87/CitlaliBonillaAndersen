@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { client } from '@/sanity/lib/client'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://allybruglii.com'
+  const baseUrl = 'https://citlalibonillaandersen.com'
 
   const paintings = await client.fetch<{ slug: { current: string }; _updatedAt: string }[]>(
     `*[_type == "painting"] { slug, _updatedAt }`
