@@ -26,20 +26,22 @@ interface Painting {
     crop?: unknown
     lqip?: string
   }
+  sold?: boolean
 }
 
 export const revalidate = 3600
 
 export default async function Home() {
   const paintings = await client.fetch<Painting[]>(
-    `*[_type == "painting"] | order(_createdAt desc)[0...6] {
+    `*[_type == "painting" && !sold] | order(_createdAt desc)[0...3] {
       _id,
       title,
       slug,
       image {
         ...,
         "lqip": asset->metadata.lqip
-      }
+      },
+      sold
     }`
   )
 
@@ -116,7 +118,7 @@ export default async function Home() {
 
       {/* CTA Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="bg-gray-50 p-12 text-center">
+        <div className="bg-gray-200 p-12 text-center">
           <h2 className="text-3xl font-light mb-6 text-black">Get in touch</h2>
           <p className="text-gray-600 mb-8 font-light">
             For inquiries or more information, you're welcome to reach out via Instagram or the contact form.<br />I look forward to hearing from you.

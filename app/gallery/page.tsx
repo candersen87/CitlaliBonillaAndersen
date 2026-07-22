@@ -33,7 +33,7 @@ export const revalidate = 3600
 
 export default async function Gallery() {
   const paintings = await client.fetch<Painting[]>(
-    `*[_type == "painting"] | order(title asc) {
+    `*[_type == "painting"] | order(sold asc, _createdAt desc) {
       _id,
       title,
       slug,
