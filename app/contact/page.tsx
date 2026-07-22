@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact — Citlali Bonilla Andersen',
     description: 'Commission a painting or get in touch with Citlali Bonilla Andersen.',
-    url: 'https://citlalibonillaandersen.com/contact',
+    url: 'https://brugliistudio.com/contact',
   },
 }
 

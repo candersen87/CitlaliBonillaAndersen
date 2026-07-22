@@ -62,14 +62,14 @@ export default function CommissionsPage() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-24 px-6 text-center bg-gray-900">
+      <section className="py-24 px-6 text-center bg-white border-b border-gray-100">
         <p className="text-xs tracking-widest uppercase text-gray-400 mb-4">
           Custom Work
         </p>
-        <h1 className="text-4xl md:text-5xl font-light tracking-tight text-white mb-6">
+        <h1 className="text-4xl md:text-5xl font-light tracking-tight text-black mb-6">
           Commission a Painting
         </h1>
-        <p className="max-w-xl mx-auto text-lg text-gray-300 font-light leading-relaxed">
+        <p className="max-w-xl mx-auto text-lg text-gray-600 font-light leading-relaxed">
           Work with me to create a custom piece that reflects your vision and
           the atmosphere of your space.
         </p>
@@ -106,9 +106,9 @@ export default function CommissionsPage() {
       </section>
 
       {/* What to Expect */}
-      <section className="py-20 px-6 bg-gray-900">
+      <section className="py-20 px-6 bg-white border-y border-gray-100">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-light tracking-tight text-white mb-2 text-center">
+          <h2 className="text-2xl font-light tracking-tight text-black mb-2 text-center">
             What to Expect
           </h2>
           <p className="text-gray-400 text-center mb-16 text-sm tracking-wide uppercase">
@@ -119,12 +119,12 @@ export default function CommissionsPage() {
             {expectations.map((item) => (
               <div
                 key={item.title}
-                className="border-t border-gray-700 pt-8"
+                className="border-t border-gray-200 pt-8"
               >
-                <h3 className="text-base font-medium text-white mb-3">
+                <h3 className="text-base font-medium text-black mb-3">
                   {item.title}
                 </h3>
-                <p className="text-gray-300 font-light leading-relaxed text-sm">
+                <p className="text-gray-600 font-light leading-relaxed text-sm">
                   {item.description}
                 </p>
               </div>

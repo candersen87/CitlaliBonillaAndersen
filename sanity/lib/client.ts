@@ -6,5 +6,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
+  // Using CDN in production for speed, but disabling it in development 
+  // to ensure design matches the latest data structure.
+  useCdn: process.env.NODE_ENV === 'production',
 })

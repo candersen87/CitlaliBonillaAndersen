@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About — Citlali Bonilla Andersen',
     description: 'Contemporary abstract painter based in Copenhagen, Denmark.',
-    url: 'https://citlalibonillaandersen.com/about',
+    url: 'https://brugliistudio.com/about',
   },
 }
 

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Gallery — Citlali Bonilla Andersen',
     description: 'Browse original abstract paintings by Citlali Bonilla Andersen.',
-    url: 'https://citlalibonillaandersen.com/gallery',
+    url: 'https://brugliistudio.com/gallery',
   },
 }
 

@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Bruglii Studio** is an integrated Next.js + Sanity CMS application combining a modern web frontend with an embedded content management studio. The architecture is a single codebase with co-located frontend, API routes, and Sanity Studio.
+**Bruglii Studio** (brugliistudio.com) is an integrated Next.js + Sanity CMS application combining a modern web frontend with an embedded content management studio. The architecture is a single codebase with co-located frontend, API routes, and Sanity Studio.
 
 ### Stack
 - **Frontend**: Next.js 16.2.2 (App Router) + React 19.2.4 with TypeScript (strict)

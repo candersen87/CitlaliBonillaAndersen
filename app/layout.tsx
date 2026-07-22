@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GFS_Didot } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const gfsDidot = GFS_Didot({
@@ -19,11 +20,11 @@ export const metadata: Metadata = {
   keywords: ["abstract painting", "contemporary art", "Copenhagen artist", "original paintings", "Citlali Bonilla Andersen"],
   authors: [{ name: "Citlali Bonilla Andersen" }],
   creator: "Citlali Bonilla Andersen",
-  metadataBase: new URL("https://citlalibonillaandersen.com"),
+  metadataBase: new URL("https://brugliistudio.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://citlalibonillaandersen.com",
+    url: "https://brugliistudio.com",
     siteName: "Citlali Bonilla Andersen",
     title: "Citlali Bonilla Andersen — Contemporary Abstract Paintings",
     description:
@@ -46,9 +47,9 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://citlalibonillaandersen.com/#artist",
+        "@id": "https://brugliistudio.com/#artist",
         name: "Citlali Bonilla Andersen",
-        url: "https://citlalibonillaandersen.com",
+        url: "https://brugliistudio.com",
         description:
           "Contemporary abstract painter based in Copenhagen, Denmark.",
         address: {
@@ -59,12 +60,12 @@ export default function RootLayout({
       },
       {
         "@type": "ArtGallery",
-        "@id": "https://citlalibonillaandersen.com/#gallery",
+        "@id": "https://brugliistudio.com/#gallery",
         name: "Citlali Bonilla Andersen Gallery",
-        url: "https://citlalibonillaandersen.com",
+        url: "https://brugliistudio.com",
         description:
           "Original abstract paintings exploring color, movement, and emotion.",
-        artist: { "@id": "https://citlalibonillaandersen.com/#artist" },
+        artist: { "@id": "https://brugliistudio.com/#artist" },
       },
     ],
   }
@@ -77,7 +78,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-white text-black antialiased font-sans">{children}<Analytics /></body>
+      <body 
+        className="bg-white text-black antialiased font-sans"
+        // This helps prevent extensions from triggering hydration warnings
+        suppressHydrationWarning
+      >
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }

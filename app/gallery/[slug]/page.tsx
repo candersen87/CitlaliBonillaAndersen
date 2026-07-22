@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     [painting.medium, painting.size].filter(Boolean).join(', ') ??
     `Original painting by Citlali Bonilla Andersen.`
   const imageUrl = urlFor(painting.image).width(1200).height(630).fit('crop').url()
-  const canonicalUrl = `https://citlalibonillaandersen.com/gallery/${slug}`
+  const canonicalUrl = `https://brugliistudio.com/gallery/${slug}`
 
   return {
     title: pageTitle,
@@ -130,11 +130,11 @@ export default async function PaintingDetail({ params }: PageProps) {
     '@context': 'https://schema.org',
     '@type': 'VisualArtwork',
     name: painting.title,
-    url: `https://citlalibonillaandersen.com/gallery/${painting.slug.current}`,
+    url: `https://brugliistudio.com/gallery/${painting.slug.current}`,
     image: urlFor(painting.image).width(1200).url(),
     artist: {
       '@type': 'Person',
-      '@id': 'https://citlalibonillaandersen.com/#artist',
+      '@id': 'https://brugliistudio.com/#artist',
       name: 'Citlali Bonilla Andersen',
     },
     ...(painting.medium && { artMedium: painting.medium }),
@@ -243,4 +243,3 @@ export default async function PaintingDetail({ params }: PageProps) {
     </Layout>
   )
 }
-
