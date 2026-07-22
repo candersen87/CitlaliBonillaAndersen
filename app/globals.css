@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
+@theme {
+  --font-gfs: var(--font-gfs-didot);
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-gfs-didot);
+  --font-gfs-didot: 'GFS Didot', serif;
 }
 
 @media (prefers-color-scheme: dark) {
